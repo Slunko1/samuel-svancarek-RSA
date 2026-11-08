@@ -1,11 +1,14 @@
 import random
 
 def generate_random_number():
-    return random.randrange(pow(10, 14), pow(10, 20))
+    return random.randrange(pow(10, 25), pow(10, 30))
 
 def check_prime(random_number, k):
     if random_number == 2:
         return True
+
+    if random_number < 0:
+        return False
 
     n = random_number - 1
 
@@ -18,6 +21,7 @@ def check_prime(random_number, k):
     s = count
 
     for i in range(k):
+        # 2 <= x <= num
         a = random.randrange(2, random_number - 1)
 
         x = pow(a, d, random_number)
