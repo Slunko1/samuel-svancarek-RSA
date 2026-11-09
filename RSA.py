@@ -59,9 +59,12 @@ def euler(n):
 			return e, count
 
 def find_inverse(e, euler_n):
-	for i in range(euler_n):
-		if pow(e, i, euler_n) == 1:
+	for i in range(1, euler_n):
+		if (e * i) % euler_n == 1:
 			return i
+
+	return None
+
 
 p = generate_random_number(pow(10, 20), pow(10, 30))
 q = generate_random_number(pow(10, 20), pow(10, 30))
