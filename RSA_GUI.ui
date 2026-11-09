@@ -71,6 +71,38 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="label_6">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 24pt &quot;ArcadeClassic&quot;;
+color:rgb(30, 32, 27);</string>
+       </property>
+       <property name="text">
+        <string>BINARY</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="textEdit_binaryText">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(30, 32, 27);
+color: rgb(147, 145, 122)</string>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="label_3">
        <property name="minimumSize">
         <size>
@@ -247,12 +279,12 @@ font: 81 60pt &quot;ArcadeClassic&quot;; color:rgb(30, 32, 27);
 color:rgb(30, 32, 27);</string>
        </property>
        <property name="text">
-        <string>KEY</string>
+        <string>PUBLIC KEY</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="textEdit_Key">
+      <widget class="QTextEdit" name="textEdit_publicKey">
        <property name="styleSheet">
         <string notr="true">background-color: rgb(30, 32, 27);
 color: rgb(147, 145, 122)</string>
@@ -267,7 +299,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_RemainingCharacters">
+      <widget class="QLabel" name="label_5">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -275,11 +307,26 @@ p, li { white-space: pre-wrap; }
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 12pt &quot;ArcadeClassic&quot;;
+        <string notr="true">font: 24pt &quot;ArcadeClassic&quot;;
 color:rgb(30, 32, 27);</string>
        </property>
        <property name="text">
-        <string/>
+        <string>PRIVATE KEY</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="textEdit_privateKey">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(30, 32, 27);
+color: rgb(147, 145, 122)</string>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
