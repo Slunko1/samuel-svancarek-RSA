@@ -5,10 +5,13 @@ def generate_random_number(a, b):
 	return random.randrange(a, b)
 
 def check_prime(random_number, k):
+	if random_number < 2:
+		return False
+
 	if random_number == 2:
 		return True
 
-	if random_number < 0:
+	if random_number % 2 == 0:
 		return False
 
 	n = random_number - 1
@@ -45,25 +48,18 @@ def multiply(p, q):
 def over_gcd(n, i):
 	return math.gcd(n, i) == 1
 
-def euler(n):
-	count = 0
+def euler(p, q):
+	return (p - 1) * (q - 1)
 
-	for i in range(1, n + 1):
-		if not over_gcd(n, i):
-			count += 1
-
+def get_euler_e(phi):
 	while True:
-		e = generate_random_number(1, count)
+		e = generate_random_number(2, phi)
 
-		if over_gcd(e, count):
-			return e, count
+		if over_gcd(e, phi):
+			return e
 
 def find_inverse(e, euler_n):
-	for d in range(1, euler_n):
-		if (e * d) % euler_n == 1:
-			return d
-
-	return None
+	return pow(e, -1, euler_n)
 
 def encrypt(m, e, n):
 	return pow(m, e, n)
@@ -71,11 +67,20 @@ def encrypt(m, e, n):
 def decrypt(c, d, n):
 	return pow(c, d, n)
 
-p = generate_random_number(pow(10, 20), pow(10, 30))
-q = generate_random_number(pow(10, 20), pow(10, 30))
-print(p)
-print(check_prime(p, 40))
-print(q)
-print(check_prime(q, 40))
+def convert_to_ascii(string):
+	ascii_values = []
+	for char in range(len(string)):
+		ascii_values.append(ord(string[char]))
 
-print(euler(1000))
+	return ascii_values
+
+def convert_ascii_to_binary(ascii_values):
+	string = ""
+	for value in ascii_values:
+		binary = format(value, '08b')
+		string += binary
+
+	return string
+
+def convert_binary_to_decimal(binary):
+	return int(binary, 2) # 2 <- znamena ze text je v bin forme
