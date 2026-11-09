@@ -59,12 +59,17 @@ def euler(n):
 			return e, count
 
 def find_inverse(e, euler_n):
-	for i in range(1, euler_n):
-		if (e * i) % euler_n == 1:
-			return i
+	for d in range(1, euler_n):
+		if (e * d) % euler_n == 1:
+			return d
 
 	return None
 
+def encrypt(m, e, n):
+	return pow(m, e, n)
+
+def decrypt(c, d, n):
+	return pow(c, d, n)
 
 p = generate_random_number(pow(10, 20), pow(10, 30))
 q = generate_random_number(pow(10, 20), pow(10, 30))
