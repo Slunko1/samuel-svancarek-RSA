@@ -1,8 +1,10 @@
 import random
 import math
 
-range_low = pow(10, 14)
-range_high = pow(10, 15)
+range_low = pow(10, 307)
+range_high = pow(10, 309)
+
+bit_size = 8
 
 def generate_random_number(a, b):
 	return random.randrange(a, b)
@@ -86,13 +88,22 @@ def encrypt(plain_text):
 	blocks = split_into_blocks(plain_text)
 
 	ciphered_text = ""
+	binary_text = ""
 	for block in blocks:
 		ascii_text = convert_to_ascii(block)
 		binary_array = convert_ascii_to_binary(ascii_text)
 		m = convert_binary_to_decimal(binary_array)
-		ciphered_text += str(pow(m, e, n))
+		binary_text += "".join(str(binary_array)) + " "
+		ciphered_text += str(pow(m, e, n)) + " "
 
-	return ciphered_text, private_key, public_key, binary_array
+
+	if binary_text[-1] == " ":
+		binary_text = binary_text[:-1]
+
+	if ciphered_text[-1] == " ":
+		ciphered_text = ciphered_text[:-1]
+
+	return ciphered_text, private_key, public_key, binary_text
 
 def decrypt(c, d, n):
 	return pow(c, d, n)
@@ -103,7 +114,7 @@ def split_into_blocks(plain_text):
 	count = 0
 	new_text = ""
 	while index < len(plain_text):
-		if count < 8:
+		if count < bit_size:
 			new_text += plain_text[index]
 			count += 1
 			index += 1
@@ -113,8 +124,8 @@ def split_into_blocks(plain_text):
 			count = 0
 
 	if new_text:
-		if len(new_text) < 8:
-			c = 8 - len(new_text)
+		if len(new_text) < bit_size:
+			c = bit_size - len(new_text)
 			new_text += c * "0"
 
 		blocks.append(new_text)
@@ -138,3 +149,42 @@ def convert_ascii_to_binary(ascii_values):
 
 def convert_binary_to_decimal(binary):
 	return int(binary, 2) # 2 <- znamena ze text je v bin forme
+
+
+
+def convert_binary_to_ascii(binary):
+	ascii_values = []
+
+	count = 0
+	index = 0
+	ascii_text = ""
+	while index < len(binary):
+		if count < bit_size:
+			ascii_text += binary[index]
+			count += 1
+			index += 1
+		else:
+			ascii_values.append(ord(ascii_text))
+			count = 0
+
+def get_blocks(cipher_text):
+	blocks = []
+
+	block_text = ""
+	for i in cipher_text:
+		if i == " ":
+			blocks.append(block_text)
+			block_text = ""
+		else:
+			block_text += i
+
+	if block_text:
+		blocks.append(block_text)
+
+	return blocks
+
+def decrypt_block(c, d, n):
+	return pow(c, d, n)
+
+def convert_decimal_to_binary(decimal):
+	return format(decimal, 'b')
