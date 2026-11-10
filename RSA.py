@@ -107,10 +107,14 @@ def encrypt(plain_text):
 
 def decrypt(cipher_text, d, n):
 	blocks = get_blocks(cipher_text)
-
+	decrypted_text = ""
 	for block in blocks:
-		decrypted_block = decrypt_block(block, d, n)
-		binary_text = convert_to_ascii(decrypted_block)
+		decrypted_block = decrypt_block(int(block), d, n)
+		binary_text = convert_decimal_to_binary(decrypted_block).zfill(bit_size * bit_size)
+		ascii_values = convert_binary_to_ascii(binary_text)
+		decrypted_text += convert_ascii_to_text(ascii_values).lstrip("\x00") # odstran null character
+
+	return decrypted_text
 
 
 def split_into_blocks(plain_text):
@@ -142,15 +146,19 @@ def convert_to_ascii(string):
 
 def convert_ascii_to_binary(ascii_values):
 	string = ""
+	new_string = ""
 	for value in ascii_values:
 		binary = format(value, '08b')
 		string += binary
 
 	if len(string) != bit_size*bit_size:
 		l = bit_size*bit_size - len(string)
-		string += "0" * l
 
-	return string
+		new_string += "0" * l + string
+	else:
+		new_string = string
+
+	return new_string
 
 def convert_binary_to_decimal(binary):
 	return int(binary, 2) # 2 <- znamena ze text je v bin forme
@@ -158,7 +166,7 @@ def convert_binary_to_decimal(binary):
 
 
 def convert_binary_to_ascii(binary):
-	ascii_values = []
+	binary_values = []
 
 	count = 0
 	index = 0
@@ -169,8 +177,22 @@ def convert_binary_to_ascii(binary):
 			count += 1
 			index += 1
 		else:
-			ascii_values.append(ord(ascii_text))
+			binary_values.append(int(ascii_text, 2))
+			ascii_text = ""
 			count = 0
+
+	if ascii_text:
+		binary_values.append(int(ascii_text, 2))
+
+	return binary_values
+
+def convert_ascii_to_text(binary_values):
+	text = ""
+
+	for i in binary_values:
+		text += chr(i)
+
+	return text
 
 def get_blocks(cipher_text):
 	blocks = []

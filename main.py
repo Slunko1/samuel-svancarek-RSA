@@ -41,7 +41,25 @@ class UiScreen(QDialog):
 			self.textEdit_cipheredText.setPlainText(str(cipher_text))
 
 		elif self.radioButton_Decrypt.isChecked():
-			return
+			plain_text = self.textEdit_plainText.toPlainText()
+			if plain_text == "":
+				QMessageBox.warning(self, "Bad input", "Plain Text cannot be empty")
+				return
+
+			private_key = self.textEdit_privateKey.toPlainText()
+
+			if private_key == "":
+				QMessageBox.warning(self, "Bad input", "Private Key cannot be empty")
+				return
+
+
+			private_key = private_key.replace("(", " ").replace(")", " ")
+
+			n, d = private_key.split(",")
+
+			decrypted_text = RSA.decrypt(plain_text, int(d), int(n))
+
+			self.textEdit_cipheredText.setPlainText(str(decrypted_text))
 
 if __name__ == "__main__":
 	app = QApplication(sys.argv)
