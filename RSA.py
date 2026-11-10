@@ -1,8 +1,8 @@
 import random
 import math
 
-range_low = pow(10, 307)
-range_high = pow(10, 309)
+range_low = pow(10, 14)
+range_high = pow(10, 15)
 
 bit_size = 8
 
@@ -105,8 +105,13 @@ def encrypt(plain_text):
 
 	return ciphered_text, private_key, public_key, binary_text
 
-def decrypt(c, d, n):
-	return pow(c, d, n)
+def decrypt(cipher_text, d, n):
+	blocks = get_blocks(cipher_text)
+
+	for block in blocks:
+		decrypted_block = decrypt_block(block, d, n)
+		binary_text = convert_to_ascii(decrypted_block)
+
 
 def split_into_blocks(plain_text):
 	blocks = []
@@ -124,10 +129,6 @@ def split_into_blocks(plain_text):
 			count = 0
 
 	if new_text:
-		if len(new_text) < bit_size:
-			c = bit_size - len(new_text)
-			new_text += c * "0"
-
 		blocks.append(new_text)
 
 	return blocks
@@ -144,6 +145,10 @@ def convert_ascii_to_binary(ascii_values):
 	for value in ascii_values:
 		binary = format(value, '08b')
 		string += binary
+
+	if len(string) != bit_size*bit_size:
+		l = bit_size*bit_size - len(string)
+		string += "0" * l
 
 	return string
 
@@ -183,8 +188,9 @@ def get_blocks(cipher_text):
 
 	return blocks
 
-def decrypt_block(c, d, n):
-	return pow(c, d, n)
+def decrypt_block(ciphered_block, d, n):
+	return pow(ciphered_block, d, n)
 
 def convert_decimal_to_binary(decimal):
 	return format(decimal, 'b')
+
